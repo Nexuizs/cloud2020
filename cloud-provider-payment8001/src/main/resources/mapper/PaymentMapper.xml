@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.springcloud.mapper.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.springcloud.entities.Payment">
+    <!--@mbg.generated-->
+    <!--@Table payment-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="seriler" jdbcType="VARCHAR" property="seriler" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, seriler
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from payment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from payment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.atguigu.springcloud.entities.Payment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into payment (seriler)
+    values (#{seriler,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.atguigu.springcloud.entities.Payment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="seriler != null">
+        seriler,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="seriler != null">
+        #{seriler,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.springcloud.entities.Payment">
+    <!--@mbg.generated-->
+    update payment
+    <set>
+      <if test="seriler != null">
+        seriler = #{seriler,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.springcloud.entities.Payment">
+    <!--@mbg.generated-->
+    update payment
+    set seriler = #{seriler,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update payment
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="seriler = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.seriler,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update payment
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="seriler = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.seriler != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.seriler,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into payment
+    (seriler)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.seriler,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.atguigu.springcloud.entities.Payment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      seriler,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{seriler,jdbcType=VARCHAR},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      seriler = #{seriler,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.atguigu.springcloud.entities.Payment" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="seriler != null">
+        seriler,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="seriler != null">
+        #{seriler,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="seriler != null">
+        seriler = #{seriler,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
