@@ -16,7 +16,6 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
              - Path=/payment/lb/** #断言，路径相匹配的进行路由
-             - Cookie=username,lzk
       discovery:
         locator:
           enabled: true
